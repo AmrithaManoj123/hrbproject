@@ -3,8 +3,8 @@ param(
     [switch]$Once
 )
 
-$repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
-Set-Location $repoRoot
+$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+Set-Location -LiteralPath $repoRoot
 
 function Invoke-GitCommand {
     param([string[]]$Arguments)
