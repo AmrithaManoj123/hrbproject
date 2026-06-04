@@ -4,6 +4,10 @@ param(
 )
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$gitCmd = 'C:\Program Files\Git\cmd'
+if (-not ($env:Path -split ';' | Where-Object { $_ -eq $gitCmd })) {
+    $env:Path = "$env:Path;$gitCmd"
+}
 Set-Location -LiteralPath $repoRoot
 
 function Invoke-GitCommand {
