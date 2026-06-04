@@ -1,0 +1,501 @@
+Category,WordCount,HasUrgencyKeyword,Priority
+Billing,6,1,CRITICAL
+Technical,7,0,LOW
+Account,8,0,LOW
+Feature Request,9,0,LOW
+General,10,1,HIGH
+Billing,11,0,MEDIUM
+Technical,12,0,MEDIUM
+Account,13,0,MEDIUM
+Feature Request,14,1,CRITICAL
+General,15,0,MEDIUM
+Billing,16,0,MEDIUM
+Technical,17,0,MEDIUM
+Account,18,1,HIGH
+Feature Request,19,0,MEDIUM
+General,20,0,MEDIUM
+Billing,21,0,MEDIUM
+Technical,22,1,CRITICAL
+Account,23,0,MEDIUM
+Feature Request,24,0,MEDIUM
+General,25,0,MEDIUM
+Billing,26,1,HIGH
+Technical,27,0,HIGH
+Account,28,0,MEDIUM
+Feature Request,29,0,MEDIUM
+General,30,1,CRITICAL
+Billing,31,0,MEDIUM
+Technical,32,0,HIGH
+Account,33,0,MEDIUM
+Feature Request,34,1,HIGH
+General,35,0,MEDIUM
+Billing,36,0,MEDIUM
+Technical,37,0,HIGH
+Account,38,1,CRITICAL
+Feature Request,39,0,MEDIUM
+General,40,0,MEDIUM
+Billing,41,0,MEDIUM
+Technical,42,1,HIGH
+Account,43,0,MEDIUM
+Feature Request,44,0,MEDIUM
+General,45,0,MEDIUM
+Billing,46,1,CRITICAL
+Technical,47,0,HIGH
+Account,48,0,MEDIUM
+Feature Request,49,0,MEDIUM
+General,50,1,HIGH
+Billing,51,0,MEDIUM
+Technical,52,0,HIGH
+Account,53,0,MEDIUM
+Feature Request,6,1,CRITICAL
+General,7,0,LOW
+Billing,8,0,LOW
+Technical,9,0,LOW
+Account,10,1,HIGH
+Feature Request,11,0,MEDIUM
+General,12,0,MEDIUM
+Billing,13,0,MEDIUM
+Technical,14,1,CRITICAL
+Account,15,0,MEDIUM
+Feature Request,16,0,MEDIUM
+General,17,0,MEDIUM
+Billing,18,1,HIGH
+Technical,19,0,MEDIUM
+Account,20,0,MEDIUM
+Feature Request,21,0,MEDIUM
+General,22,1,CRITICAL
+Billing,23,0,MEDIUM
+Technical,24,0,MEDIUM
+Account,25,0,MEDIUM
+Feature Request,26,1,HIGH
+General,27,0,MEDIUM
+Billing,28,0,MEDIUM
+Technical,29,0,HIGH
+Account,30,1,CRITICAL
+Feature Request,31,0,MEDIUM
+General,32,0,MEDIUM
+Billing,33,0,MEDIUM
+Technical,34,1,HIGH
+Account,35,0,MEDIUM
+Feature Request,36,0,MEDIUM
+General,37,0,MEDIUM
+Billing,38,1,CRITICAL
+Technical,39,0,HIGH
+Account,40,0,MEDIUM
+Feature Request,41,0,MEDIUM
+General,42,1,HIGH
+Billing,43,0,MEDIUM
+Technical,44,0,HIGH
+Account,45,0,MEDIUM
+Feature Request,46,1,CRITICAL
+General,47,0,MEDIUM
+Billing,48,0,MEDIUM
+Technical,49,0,HIGH
+Account,50,1,HIGH
+Feature Request,51,0,MEDIUM
+General,52,0,MEDIUM
+Billing,53,0,MEDIUM
+Technical,6,1,CRITICAL
+Account,7,0,LOW
+Feature Request,8,0,LOW
+General,9,0,LOW
+Billing,10,1,HIGH
+Technical,11,0,MEDIUM
+Account,12,0,MEDIUM
+Feature Request,13,0,MEDIUM
+General,14,1,CRITICAL
+Billing,15,0,MEDIUM
+Technical,16,0,MEDIUM
+Account,17,0,MEDIUM
+Feature Request,18,1,HIGH
+General,19,0,MEDIUM
+Billing,20,0,MEDIUM
+Technical,21,0,MEDIUM
+Account,22,1,CRITICAL
+Feature Request,23,0,MEDIUM
+General,24,0,MEDIUM
+Billing,25,0,MEDIUM
+Technical,26,1,HIGH
+Account,27,0,MEDIUM
+Feature Request,28,0,MEDIUM
+General,29,0,MEDIUM
+Billing,30,1,CRITICAL
+Technical,31,0,HIGH
+Account,32,0,MEDIUM
+Feature Request,33,0,MEDIUM
+General,34,1,HIGH
+Billing,35,0,MEDIUM
+Technical,36,0,HIGH
+Account,37,0,MEDIUM
+Feature Request,38,1,CRITICAL
+General,39,0,MEDIUM
+Billing,40,0,MEDIUM
+Technical,41,0,HIGH
+Account,42,1,HIGH
+Feature Request,43,0,MEDIUM
+General,44,0,MEDIUM
+Billing,45,0,MEDIUM
+Technical,46,1,CRITICAL
+Account,47,0,MEDIUM
+Feature Request,48,0,MEDIUM
+General,49,0,MEDIUM
+Billing,50,1,HIGH
+Technical,51,0,HIGH
+Account,52,0,MEDIUM
+Feature Request,53,0,MEDIUM
+General,6,1,CRITICAL
+Billing,7,0,LOW
+Technical,8,0,LOW
+Account,9,0,LOW
+Feature Request,10,1,HIGH
+General,11,0,MEDIUM
+Billing,12,0,MEDIUM
+Technical,13,0,MEDIUM
+Account,14,1,CRITICAL
+Feature Request,15,0,MEDIUM
+General,16,0,MEDIUM
+Billing,17,0,MEDIUM
+Technical,18,1,HIGH
+Account,19,0,MEDIUM
+Feature Request,20,0,MEDIUM
+General,21,0,MEDIUM
+Billing,22,1,CRITICAL
+Technical,23,0,MEDIUM
+Account,24,0,MEDIUM
+Feature Request,25,0,MEDIUM
+General,26,1,HIGH
+Billing,27,0,MEDIUM
+Technical,28,0,HIGH
+Account,29,0,MEDIUM
+Feature Request,30,1,CRITICAL
+General,31,0,MEDIUM
+Billing,32,0,MEDIUM
+Technical,33,0,HIGH
+Account,34,1,HIGH
+Feature Request,35,0,MEDIUM
+General,36,0,MEDIUM
+Billing,37,0,MEDIUM
+Technical,38,1,CRITICAL
+Account,39,0,MEDIUM
+Feature Request,40,0,MEDIUM
+General,41,0,MEDIUM
+Billing,42,1,HIGH
+Technical,43,0,HIGH
+Account,44,0,MEDIUM
+Feature Request,45,0,MEDIUM
+General,46,1,CRITICAL
+Billing,47,0,MEDIUM
+Technical,48,0,HIGH
+Account,49,0,MEDIUM
+Feature Request,50,1,HIGH
+General,51,0,MEDIUM
+Billing,52,0,MEDIUM
+Technical,53,0,HIGH
+Account,6,1,CRITICAL
+Feature Request,7,0,LOW
+General,8,0,LOW
+Billing,9,0,LOW
+Technical,10,1,HIGH
+Account,11,0,MEDIUM
+Feature Request,12,0,MEDIUM
+General,13,0,MEDIUM
+Billing,14,1,CRITICAL
+Technical,15,0,MEDIUM
+Account,16,0,MEDIUM
+Feature Request,17,0,MEDIUM
+General,18,1,HIGH
+Billing,19,0,MEDIUM
+Technical,20,0,MEDIUM
+Account,21,0,MEDIUM
+Feature Request,22,1,CRITICAL
+General,23,0,MEDIUM
+Billing,24,0,MEDIUM
+Technical,25,0,HIGH
+Account,26,1,HIGH
+Feature Request,27,0,MEDIUM
+General,28,0,MEDIUM
+Billing,29,0,MEDIUM
+Technical,30,1,CRITICAL
+Account,31,0,MEDIUM
+Feature Request,32,0,MEDIUM
+General,33,0,MEDIUM
+Billing,34,1,HIGH
+Technical,35,0,HIGH
+Account,36,0,MEDIUM
+Feature Request,37,0,MEDIUM
+General,38,1,CRITICAL
+Billing,39,0,MEDIUM
+Technical,40,0,HIGH
+Account,41,0,MEDIUM
+Feature Request,42,1,HIGH
+General,43,0,MEDIUM
+Billing,44,0,MEDIUM
+Technical,45,0,HIGH
+Account,46,1,CRITICAL
+Feature Request,47,0,MEDIUM
+General,48,0,MEDIUM
+Billing,49,0,MEDIUM
+Technical,50,1,HIGH
+Account,51,0,MEDIUM
+Feature Request,52,0,MEDIUM
+General,53,0,MEDIUM
+Billing,6,1,CRITICAL
+Technical,7,0,LOW
+Account,8,0,LOW
+Feature Request,9,0,LOW
+General,10,1,HIGH
+Billing,11,0,MEDIUM
+Technical,12,0,MEDIUM
+Account,13,0,MEDIUM
+Feature Request,14,1,CRITICAL
+General,15,0,MEDIUM
+Billing,16,0,MEDIUM
+Technical,17,0,MEDIUM
+Account,18,1,HIGH
+Feature Request,19,0,MEDIUM
+General,20,0,MEDIUM
+Billing,21,0,MEDIUM
+Technical,22,1,CRITICAL
+Account,23,0,MEDIUM
+Feature Request,24,0,MEDIUM
+General,25,0,MEDIUM
+Billing,26,1,HIGH
+Technical,27,0,HIGH
+Account,28,0,MEDIUM
+Feature Request,29,0,MEDIUM
+General,30,1,CRITICAL
+Billing,31,0,MEDIUM
+Technical,32,0,HIGH
+Account,33,0,MEDIUM
+Feature Request,34,1,HIGH
+General,35,0,MEDIUM
+Billing,36,0,MEDIUM
+Technical,37,0,HIGH
+Account,38,1,CRITICAL
+Feature Request,39,0,MEDIUM
+General,40,0,MEDIUM
+Billing,41,0,MEDIUM
+Technical,42,1,HIGH
+Account,43,0,MEDIUM
+Feature Request,44,0,MEDIUM
+General,45,0,MEDIUM
+Billing,46,1,CRITICAL
+Technical,47,0,HIGH
+Account,48,0,MEDIUM
+Feature Request,49,0,MEDIUM
+General,50,1,HIGH
+Billing,51,0,MEDIUM
+Technical,52,0,HIGH
+Account,53,0,MEDIUM
+Feature Request,6,1,CRITICAL
+General,7,0,LOW
+Billing,8,0,LOW
+Technical,9,0,LOW
+Account,10,1,HIGH
+Feature Request,11,0,MEDIUM
+General,12,0,MEDIUM
+Billing,13,0,MEDIUM
+Technical,14,1,CRITICAL
+Account,15,0,MEDIUM
+Feature Request,16,0,MEDIUM
+General,17,0,MEDIUM
+Billing,18,1,HIGH
+Technical,19,0,MEDIUM
+Account,20,0,MEDIUM
+Feature Request,21,0,MEDIUM
+General,22,1,CRITICAL
+Billing,23,0,MEDIUM
+Technical,24,0,MEDIUM
+Account,25,0,MEDIUM
+Feature Request,26,1,HIGH
+General,27,0,MEDIUM
+Billing,28,0,MEDIUM
+Technical,29,0,HIGH
+Account,30,1,CRITICAL
+Feature Request,31,0,MEDIUM
+General,32,0,MEDIUM
+Billing,33,0,MEDIUM
+Technical,34,1,HIGH
+Account,35,0,MEDIUM
+Feature Request,36,0,MEDIUM
+General,37,0,MEDIUM
+Billing,38,1,CRITICAL
+Technical,39,0,HIGH
+Account,40,0,MEDIUM
+Feature Request,41,0,MEDIUM
+General,42,1,HIGH
+Billing,43,0,MEDIUM
+Technical,44,0,HIGH
+Account,45,0,MEDIUM
+Feature Request,46,1,CRITICAL
+General,47,0,MEDIUM
+Billing,48,0,MEDIUM
+Technical,49,0,HIGH
+Account,50,1,HIGH
+Feature Request,51,0,MEDIUM
+General,52,0,MEDIUM
+Billing,53,0,MEDIUM
+Technical,6,1,CRITICAL
+Account,7,0,LOW
+Feature Request,8,0,LOW
+General,9,0,LOW
+Billing,10,1,HIGH
+Technical,11,0,MEDIUM
+Account,12,0,MEDIUM
+Feature Request,13,0,MEDIUM
+General,14,1,CRITICAL
+Billing,15,0,MEDIUM
+Technical,16,0,MEDIUM
+Account,17,0,MEDIUM
+Feature Request,18,1,HIGH
+General,19,0,MEDIUM
+Billing,20,0,MEDIUM
+Technical,21,0,MEDIUM
+Account,22,1,CRITICAL
+Feature Request,23,0,MEDIUM
+General,24,0,MEDIUM
+Billing,25,0,MEDIUM
+Technical,26,1,HIGH
+Account,27,0,MEDIUM
+Feature Request,28,0,MEDIUM
+General,29,0,MEDIUM
+Billing,30,1,CRITICAL
+Technical,31,0,HIGH
+Account,32,0,MEDIUM
+Feature Request,33,0,MEDIUM
+General,34,1,HIGH
+Billing,35,0,MEDIUM
+Technical,36,0,HIGH
+Account,37,0,MEDIUM
+Feature Request,38,1,CRITICAL
+General,39,0,MEDIUM
+Billing,40,0,MEDIUM
+Technical,41,0,HIGH
+Account,42,1,HIGH
+Feature Request,43,0,MEDIUM
+General,44,0,MEDIUM
+Billing,45,0,MEDIUM
+Technical,46,1,CRITICAL
+Account,47,0,MEDIUM
+Feature Request,48,0,MEDIUM
+General,49,0,MEDIUM
+Billing,50,1,HIGH
+Technical,51,0,HIGH
+Account,52,0,MEDIUM
+Feature Request,53,0,MEDIUM
+General,6,1,CRITICAL
+Billing,7,0,LOW
+Technical,8,0,LOW
+Account,9,0,LOW
+Feature Request,10,1,HIGH
+General,11,0,MEDIUM
+Billing,12,0,MEDIUM
+Technical,13,0,MEDIUM
+Account,14,1,CRITICAL
+Feature Request,15,0,MEDIUM
+General,16,0,MEDIUM
+Billing,17,0,MEDIUM
+Technical,18,1,HIGH
+Account,19,0,MEDIUM
+Feature Request,20,0,MEDIUM
+General,21,0,MEDIUM
+Billing,22,1,CRITICAL
+Technical,23,0,MEDIUM
+Account,24,0,MEDIUM
+Feature Request,25,0,MEDIUM
+General,26,1,HIGH
+Billing,27,0,MEDIUM
+Technical,28,0,HIGH
+Account,29,0,MEDIUM
+Feature Request,30,1,CRITICAL
+General,31,0,MEDIUM
+Billing,32,0,MEDIUM
+Technical,33,0,HIGH
+Account,34,1,HIGH
+Feature Request,35,0,MEDIUM
+General,36,0,MEDIUM
+Billing,37,0,MEDIUM
+Technical,38,1,CRITICAL
+Account,39,0,MEDIUM
+Feature Request,40,0,MEDIUM
+General,41,0,MEDIUM
+Billing,42,1,HIGH
+Technical,43,0,HIGH
+Account,44,0,MEDIUM
+Feature Request,45,0,MEDIUM
+General,46,1,CRITICAL
+Billing,47,0,MEDIUM
+Technical,48,0,HIGH
+Account,49,0,MEDIUM
+Feature Request,50,1,HIGH
+General,51,0,MEDIUM
+Billing,52,0,MEDIUM
+Technical,53,0,HIGH
+Account,6,1,CRITICAL
+Feature Request,7,0,LOW
+General,8,0,LOW
+Billing,9,0,LOW
+Technical,10,1,HIGH
+Account,11,0,MEDIUM
+Feature Request,12,0,MEDIUM
+General,13,0,MEDIUM
+Billing,14,1,CRITICAL
+Technical,15,0,MEDIUM
+Account,16,0,MEDIUM
+Feature Request,17,0,MEDIUM
+General,18,1,HIGH
+Billing,19,0,MEDIUM
+Technical,20,0,MEDIUM
+Account,21,0,MEDIUM
+Feature Request,22,1,CRITICAL
+General,23,0,MEDIUM
+Billing,24,0,MEDIUM
+Technical,25,0,HIGH
+Account,26,1,HIGH
+Feature Request,27,0,MEDIUM
+General,28,0,MEDIUM
+Billing,29,0,MEDIUM
+Technical,30,1,CRITICAL
+Account,31,0,MEDIUM
+Feature Request,32,0,MEDIUM
+General,33,0,MEDIUM
+Billing,34,1,HIGH
+Technical,35,0,HIGH
+Account,36,0,MEDIUM
+Feature Request,37,0,MEDIUM
+General,38,1,CRITICAL
+Billing,39,0,MEDIUM
+Technical,40,0,HIGH
+Account,41,0,MEDIUM
+Feature Request,42,1,HIGH
+General,43,0,MEDIUM
+Billing,44,0,MEDIUM
+Technical,45,0,HIGH
+Account,46,1,CRITICAL
+Feature Request,47,0,MEDIUM
+General,48,0,MEDIUM
+Billing,49,0,MEDIUM
+Technical,50,1,HIGH
+Account,51,0,MEDIUM
+Feature Request,52,0,MEDIUM
+General,53,0,MEDIUM
+Billing,6,1,CRITICAL
+Technical,7,0,LOW
+Account,8,0,LOW
+Feature Request,9,0,LOW
+General,10,1,HIGH
+Billing,11,0,MEDIUM
+Technical,12,0,MEDIUM
+Account,13,0,MEDIUM
+Feature Request,14,1,CRITICAL
+General,15,0,MEDIUM
+Billing,16,0,MEDIUM
+Technical,17,0,MEDIUM
+Account,18,1,HIGH
+Feature Request,19,0,MEDIUM
+General,20,0,MEDIUM
+Billing,21,0,MEDIUM
+Technical,22,1,CRITICAL
+Account,23,0,MEDIUM
+Feature Request,24,0,MEDIUM
+General,25,0,MEDIUM
