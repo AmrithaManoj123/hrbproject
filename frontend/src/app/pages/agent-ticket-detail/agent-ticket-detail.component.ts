@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { TicketDetail } from '../../models/ticket.model';
 import { AdminDataService, CategoryOption, TeamOption, UserOption } from '../../services/admin-data.service';
@@ -19,7 +19,7 @@ import { TicketService } from '../../services/ticket.service';
         </div>
         <a [routerLink]="homePath"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>Dashboard</a>
         <a class="active" [routerLink]="ticketsPath"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>{{ isAdmin ? 'Tickets' : 'My Tickets' }}</a>
-        <button type="button" (click)="auth.logout()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8V5a2 2 0 0 0-2-2H5v18h7a2 2 0 0 0 2-2v-3"/><path d="M9 12h12"/><path d="m17 8 4 4-4 4"/></svg>Logout</button>
+        <button type="button" (click)="logout()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8V5a2 2 0 0 0-2-2H5v18h7a2 2 0 0 0 2-2v-3"/><path d="M9 12h12"/><path d="m17 8 4 4-4 4"/></svg>Logout</button>
       </aside>
 
       <section class="content">
@@ -239,6 +239,7 @@ export class AgentTicketDetailComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly tickets: TicketService,
     private readonly adminData: AdminDataService,
     public readonly auth: AuthService
@@ -275,6 +276,11 @@ export class AgentTicketDetailComponent implements OnInit {
       this.agents = data.agents;
       this.load();
     });
+  }
+
+  logout() {
+    this.auth.clearSession();
+    this.router.navigate(['/login']);
   }
 
   changeStatus() {

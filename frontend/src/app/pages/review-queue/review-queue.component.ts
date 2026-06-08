@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TicketListItem } from '../../models/ticket.model';
 import { AuthService } from '../../services/auth.service';
 import { TicketService } from '../../services/ticket.service';
@@ -48,7 +48,7 @@ type ReviewTicket = {
           }
         </nav>
 
-        <button class="logout" type="button" (click)="auth.logout()">
+        <button class="logout" type="button" (click)="logout()">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8V5a2 2 0 0 0-2-2H5v18h7a2 2 0 0 0 2-2v-3"/><path d="M9 12h12"/><path d="m17 8 4 4-4 4"/></svg>
           Logout
         </button>
@@ -294,7 +294,11 @@ export class ReviewQueueComponent implements OnInit {
 
   tickets: ReviewTicket[] = [];
 
-  constructor(public readonly auth: AuthService, private readonly ticketApi: TicketService) {}
+  constructor(
+    public readonly auth: AuthService,
+    private readonly router: Router,
+    private readonly ticketApi: TicketService
+  ) {}
 
   ngOnInit() {
     this.ticketApi.list({ pageSize: 100 }).subscribe(response => {
@@ -314,6 +318,11 @@ export class ReviewQueueComponent implements OnInit {
 
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
+
+  logout() {
+    this.auth.clearSession();
+    this.router.navigate(['/login']);
   }
 
   get visibleTickets() {

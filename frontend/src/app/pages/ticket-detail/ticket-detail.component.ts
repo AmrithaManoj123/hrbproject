@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TicketDetail } from '../../models/ticket.model';
 import { AuthService } from '../../services/auth.service';
 import { TicketService } from '../../services/ticket.service';
@@ -41,7 +41,7 @@ type TimelineStep = {
           </a>
         </nav>
 
-        <button class="logout" type="button" (click)="auth.logout()">
+        <button class="logout" type="button" (click)="logout()">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8V5a2 2 0 0 0-2-2H5v18h7a2 2 0 0 0 2-2v-3"/><path d="M9 12h12"/><path d="m17 8 4 4-4 4"/></svg>
           Logout
         </button>
@@ -369,6 +369,7 @@ export class TicketDetailComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly tickets: TicketService,
     public readonly auth: AuthService
   ) {}
@@ -402,6 +403,11 @@ export class TicketDetailComponent implements OnInit {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
     return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+  }
+
+  logout() {
+    this.auth.clearSession();
+    this.router.navigate(['/login']);
   }
 
   get timelineSteps(): TimelineStep[] {

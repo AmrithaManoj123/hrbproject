@@ -50,7 +50,7 @@ type AgentTicketRow = TicketListItem & {
           </a>
         </nav>
 
-        <button class="logout" type="button" (click)="auth.logout()">
+        <button class="logout" type="button" (click)="logout()">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8V5a2 2 0 0 0-2-2H5v18h7a2 2 0 0 0 2-2v-3"/><path d="M9 12h12"/><path d="m17 8 4 4-4 4"/></svg>
           Logout
         </button>
@@ -397,7 +397,7 @@ export class AgentDashboardComponent implements OnInit {
   sidebarCollapsed = false;
 
   constructor(
-    // AuthService is public because the template calls auth.logout().
+    // AuthService is public because the template reads the current user.
     public readonly auth: AuthService,
 
     // DashboardService loads aggregate statistics for the cards.
@@ -528,6 +528,11 @@ export class AgentDashboardComponent implements OnInit {
   // Hide or show the sidebar without leaving the dashboard.
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
+
+  logout() {
+    this.auth.clearSession();
+    this.router.navigate(['/login']);
   }
 
   // Toggle the SLA risk filter and reset other status filters.

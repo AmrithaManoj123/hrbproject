@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { BaseChartDirective } from 'ng2-charts';
 import type { ChartConfiguration } from 'chart.js';
@@ -48,7 +48,7 @@ type StatCard = {
           }
         </nav>
 
-        <button class="logout" type="button" (click)="auth.logout()">
+        <button class="logout" type="button" (click)="logout()">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8V5a2 2 0 0 0-2-2H5v18h7a2 2 0 0 0 2-2v-3"/><path d="M9 12h12"/><path d="m17 8 4 4-4 4"/></svg>
           Logout
         </button>
@@ -474,7 +474,11 @@ export class AdminPanelComponent implements OnInit {
     { id: 1231, title: 'App keeps crashing', confidence: 40, date: 'May 10, 2024' }
   ];
 
-  constructor(public readonly auth: AuthService, private readonly dashboard: DashboardService) {}
+  constructor(
+    public readonly auth: AuthService,
+    private readonly router: Router,
+    private readonly dashboard: DashboardService
+  ) {}
 
   get displayName() {
     return this.auth.user()?.fullName ?? 'Admin User';
@@ -536,6 +540,11 @@ export class AdminPanelComponent implements OnInit {
 
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
+
+  logout() {
+    this.auth.clearSession();
+    this.router.navigate(['/login']);
   }
 
   private formatResolution() {

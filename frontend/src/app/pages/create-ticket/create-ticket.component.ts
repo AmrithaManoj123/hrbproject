@@ -34,7 +34,7 @@ import { TicketService } from '../../services/ticket.service';
           </a>
         </nav>
 
-        <button class="logout" type="button" (click)="auth.logout()">
+        <button class="logout" type="button" (click)="logout()">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8V5a2 2 0 0 0-2-2H5v18h7a2 2 0 0 0 2-2v-3"/><path d="M9 12h12"/><path d="m17 8 4 4-4 4"/></svg>
           Logout
         </button>
@@ -259,6 +259,11 @@ export class CreateTicketComponent {
 
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
+
+  logout() {
+    this.auth.clearSession();
+    this.router.navigate(['/login']);
   }
 
   onFilesSelected(event: Event) {

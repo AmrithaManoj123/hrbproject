@@ -27,11 +27,6 @@ export class AuthService {
     this.router.navigate([`/${response.user.role}/dashboard`]);
   }
 
-  logout() {
-    this.clearSession();
-    this.router.navigate(['/login']);
-  }
-
   clearSession() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
