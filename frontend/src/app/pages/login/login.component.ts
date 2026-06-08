@@ -162,10 +162,12 @@ export class LoginComponent {
   rememberMe = false;
 
   constructor(private readonly auth: AuthService) {
+    // Opening the login page should always start from a clean local session.
     this.auth.clearSession();
   }
 
   submit() {
+    // Normalize before sending so email casing and accidental spaces do not block valid users.
     const email = this.email.trim().toLowerCase();
     const password = this.password.trim();
     this.error = '';
@@ -177,6 +179,7 @@ export class LoginComponent {
 
     this.isSubmitting = true;
     this.auth.login(email, password).subscribe({
+      // AuthService stores the token and routes to the dashboard that matches the returned role.
       next: response => this.auth.completeLogin(response),
       error: response => {
         this.error = this.errorMessage(response);

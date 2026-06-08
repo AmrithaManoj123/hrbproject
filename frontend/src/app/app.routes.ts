@@ -6,6 +6,7 @@ export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent) },
   { path: 'register', loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent) },
+  // Customer pages are guarded separately from agent/admin pages so URL access matches the user's role.
   {
     path: 'customer/dashboard',
     canActivate: [authGuard, roleGuard('customer')],
@@ -26,6 +27,7 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard('customer')],
     loadComponent: () => import('./pages/ticket-detail/ticket-detail.component').then(m => m.TicketDetailComponent)
   },
+  // Agent routes focus on assigned work and ticket handling tools.
   {
     path: 'agent/dashboard',
     canActivate: [authGuard, roleGuard('agent')],
@@ -51,6 +53,7 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard('agent')],
     loadComponent: () => import('./pages/agent-ticket-detail/agent-ticket-detail.component').then(m => m.AgentTicketDetailComponent)
   },
+  // Admin routes use broader workbench/detail components because admins can review, assign, and configure system data.
   {
     path: 'admin/dashboard',
     canActivate: [authGuard, roleGuard('admin')],

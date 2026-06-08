@@ -206,10 +206,12 @@ export class RegisterComponent {
   showConfirmPassword = false;
 
   constructor(private readonly auth: AuthService) {
+    // Registration should not reuse a previous token from another browser session.
     this.auth.clearSession();
   }
 
   submit() {
+    // Trim and normalize user input once so validation and the API receive the same values.
     const fullName = this.fullName.trim();
     const email = this.email.trim().toLowerCase();
     const password = this.password.trim();
@@ -233,6 +235,7 @@ export class RegisterComponent {
 
     this.isSubmitting = true;
     this.auth.register(fullName, email, password).subscribe({
+      // New accounts are signed in immediately, so reuse the same session-completion path as login.
       next: response => this.auth.completeLogin(response),
       error: response => {
         this.error = this.errorMessage(response);

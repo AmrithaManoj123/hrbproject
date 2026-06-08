@@ -921,6 +921,7 @@ export class CustomerDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Customers only need their ticket list here; counts and filters are derived locally from that list.
     this.ticketsApi.list().subscribe(response => this.tickets = response.items);
   }
 
@@ -929,11 +930,13 @@ export class CustomerDashboardComponent implements OnInit {
   }
 
   logout() {
+    // The dashboard handles the redirect, while AuthService keeps storage and signal state consistent.
     this.auth.clearSession();
     this.router.navigate(['/login']);
   }
 
   applyStatus(status: string, panel?: HTMLElement) {
+    // Summary cards act as shortcuts into the ticket table, so reset search/paging when a card is chosen.
     this.statusFilter = status;
     this.searchTerm = '';
     this.page = 1;

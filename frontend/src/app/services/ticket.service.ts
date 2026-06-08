@@ -9,6 +9,8 @@ export class TicketService {
 
   list(filters: Record<string, string | number | undefined> = {}) {
     let params = new HttpParams();
+
+    // Skip empty filters so the backend receives only the query options the current page actually selected.
     Object.entries(filters).forEach(([key, value]) => {
       if (value !== undefined && value !== '') params = params.set(key, value);
     });
@@ -24,6 +26,7 @@ export class TicketService {
   }
 
   uploadAttachment(ticketId: number, file: File) {
+    // Files must use multipart form data; JSON payloads cannot carry browser File objects correctly.
     const body = new FormData();
     body.append('file', file);
     return this.http.post(`${environment.apiUrl}/tickets/${ticketId}/attachments`, body);

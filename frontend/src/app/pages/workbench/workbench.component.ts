@@ -266,6 +266,7 @@ export class WorkbenchComponent implements OnInit {
   }
 
   logout() {
+    // Workbench is reused across several routes, so each instance performs the same local logout navigation.
     this.auth.clearSession();
     this.router.navigate(['/login']);
   }
@@ -361,6 +362,7 @@ export class WorkbenchComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Load shared admin/agent workbench data once; getters decide which slices are visible for the current route.
     forkJoin({
       ticketPage: this.ticketsApi.list({ pageSize: 100 }),
       categories: this.adminData.categories(),

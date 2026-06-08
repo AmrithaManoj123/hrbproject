@@ -301,6 +301,7 @@ export class ReviewQueueComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // The review queue is built from tickets whose AI confidence needs human confirmation.
     this.ticketApi.list({ pageSize: 100 }).subscribe(response => {
       this.tickets = response.items
         .filter(ticket => ticket.requiresAgentReview || (ticket.aiConfidenceScore ?? 1) < 0.6)
@@ -321,6 +322,7 @@ export class ReviewQueueComponent implements OnInit {
   }
 
   logout() {
+    // Keep page routing behavior local after the shared auth state has been cleared.
     this.auth.clearSession();
     this.router.navigate(['/login']);
   }

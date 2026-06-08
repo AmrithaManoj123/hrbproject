@@ -10,6 +10,7 @@ export type UserOption = { id: string; fullName: string; email: string; role: st
 export class AdminDataService {
   constructor(private readonly http: HttpClient) {}
 
+  // Admin screens reuse these option lists for filters, assignments, and setup forms.
   categories() {
     return this.http.get<CategoryOption[]>(`${environment.apiUrl}/categories`);
   }
@@ -19,6 +20,7 @@ export class AdminDataService {
   }
 
   agents() {
+    // The backend exposes all users, so pass role=agent to keep dropdowns focused on assignable staff.
     return this.http.get<UserOption[]>(`${environment.apiUrl}/users`, { params: { role: 'agent' } });
   }
 

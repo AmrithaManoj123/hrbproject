@@ -266,6 +266,7 @@ export class AgentTicketDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Load lookup data first so status/category/team controls are ready when the ticket arrives.
     forkJoin({
       categories: this.adminData.categories(),
       teams: this.adminData.teams(),
@@ -279,11 +280,13 @@ export class AgentTicketDetailComponent implements OnInit {
   }
 
   logout() {
+    // This page decides where the user goes after logout; AuthService clears the stored identity.
     this.auth.clearSession();
     this.router.navigate(['/login']);
   }
 
   changeStatus() {
+    // Status changes are followed by a reload so the detail page reflects backend workflow rules.
     if (!this.ticket) return;
     this.tickets.changeStatus(this.ticket.id, this.status).subscribe(() => this.afterAction('Status updated.'));
   }

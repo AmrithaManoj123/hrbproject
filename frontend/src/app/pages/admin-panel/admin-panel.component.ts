@@ -534,6 +534,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Load dashboard data once the admin page opens; fallback values keep the layout useful while the API responds.
     this.dashboard.stats().subscribe(stats => this.stats = stats);
     this.dashboard.agents().subscribe((agents: any) => this.agents = agents);
   }
@@ -543,6 +544,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   logout() {
+    // The component owns the navigation decision; AuthService owns the actual session cleanup.
     this.auth.clearSession();
     this.router.navigate(['/login']);
   }

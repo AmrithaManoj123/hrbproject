@@ -319,6 +319,7 @@ export class TeamsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Teams, categories, and agents are loaded together because the table combines all three concepts.
     this.loadTeams();
   }
 
@@ -335,6 +336,7 @@ export class TeamsComponent implements OnInit {
   }
 
   logout() {
+    // Teams owns the logout button action; AuthService owns the session reset.
     this.auth.clearSession();
     this.router.navigate(['/login']);
   }
@@ -385,6 +387,7 @@ export class TeamsComponent implements OnInit {
   }
 
   private loadTeams() {
+    // Fetch related admin data in parallel so team rows can show category and lead names together.
     forkJoin({
       teams: this.adminData.teams(),
       categories: this.adminData.categories(),

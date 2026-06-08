@@ -262,6 +262,7 @@ export class CreateTicketComponent {
   }
 
   logout() {
+    // Clearing the session first prevents guards from treating the next page as authenticated.
     this.auth.clearSession();
     this.router.navigate(['/login']);
   }
@@ -294,6 +295,7 @@ export class CreateTicketComponent {
   private setFiles(selected: File[]) {
     const allowed = ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx', 'txt'];
 
+    // Validate on the client so users get fast feedback before the API receives the upload.
     if (selected.length > 3) {
       this.error = 'You can upload up to 3 files.';
       this.files = [];
@@ -314,6 +316,7 @@ export class CreateTicketComponent {
   submit() {
     this.error = '';
 
+    // Keep the form checks here because this component owns the ticket-creation UI state.
     if (!this.title.trim() || !this.description.trim()) {
       this.error = 'Title and description are required.';
       return;
@@ -326,6 +329,7 @@ export class CreateTicketComponent {
 
     this.tickets.create(this.title, this.description).pipe(
       switchMap(ticket => {
+        // Create the ticket first, then upload files against the id returned by the backend.
         if (!this.files.length) return of(ticket);
         return forkJoin(this.files.map(file => this.tickets.uploadAttachment(ticket.id, file))).pipe(
           switchMap(() => of(ticket))

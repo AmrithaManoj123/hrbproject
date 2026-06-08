@@ -531,6 +531,7 @@ export class AgentDashboardComponent implements OnInit {
   }
 
   logout() {
+    // Keep logout navigation at the page level while reusing the shared session cleanup.
     this.auth.clearSession();
     this.router.navigate(['/login']);
   }

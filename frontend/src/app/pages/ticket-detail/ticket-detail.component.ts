@@ -406,6 +406,7 @@ export class TicketDetailComponent implements OnInit {
   }
 
   logout() {
+    // The detail view clears auth state before routing so protected content is no longer reachable.
     this.auth.clearSession();
     this.router.navigate(['/login']);
   }
@@ -430,6 +431,7 @@ export class TicketDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Load the current ticket from the route so the detail page stays reusable for every ticket id.
     this.load();
   }
 
