@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
+[Authorize]
 [Route("api/tickets/{ticketId:long}/comments")]
 public class CommentsController : ControllerBase
 {

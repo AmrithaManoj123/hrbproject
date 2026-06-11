@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
 [ApiController]
+[Authorize]
 [Route("api/dashboard")]
 public class DashboardController(IMemoryCache cache) : ControllerBase
 {

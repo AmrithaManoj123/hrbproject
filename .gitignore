@@ -4,6 +4,7 @@ obj/
 build/
 out/
 dist/
+frontend/.angular/cache/
 
 # Dependencies
 node_modules/

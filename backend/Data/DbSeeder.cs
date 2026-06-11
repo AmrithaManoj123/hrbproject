@@ -10,6 +10,7 @@ public static class DbSeeder
             var engineeringLead = AddUser(db, "Engineering Lead", "engineering.lead@company.com", "Agent123!", Roles.Agent);
             var supportLead = AddUser(db, "Support Lead", "support.lead@company.com", "Agent123!", Roles.Agent);
             var supportAgent = AddUser(db, "Support Agent", "support.agent@company.com", "Agent123!", Roles.Agent);
+            AddUser(db, "Amritha Manoj", "amrithamanoj@gmail.com", "password12345678", Roles.Customer);
             _ = admin;
 
             db.Teams.AddRange(

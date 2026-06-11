@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FluentValidation;
 
 [ApiController]
+[Authorize]
 [Route("api/tickets")]
 public class TicketsController : ControllerBase
 {

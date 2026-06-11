@@ -1,12 +1,15 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FluentValidation;
 
 [ApiController]
+[Authorize]
 // This controller handles the authentication endpoints used by the frontend.
 [Route("api/auth")]
 public class AuthController : ControllerBase
 {
     [HttpPost("register")]
+    [AllowAnonymous]
     public IActionResult Register(RegisterRequest request, [FromServices] IValidator<RegisterRequest> validator)
     {
         request = new RegisterRequest(request.FullName.Trim(), request.Email.Trim(), request.Password.Trim());
@@ -39,6 +42,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
+    [AllowAnonymous]
     public IActionResult Login(LoginRequest request, [FromServices] IValidator<LoginRequest> validator)
     {
         request = new LoginRequest(request.Email.Trim(), request.Password.Trim());

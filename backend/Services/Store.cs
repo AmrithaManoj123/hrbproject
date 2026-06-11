@@ -26,6 +26,7 @@ public static class Store
         var engineeringLead = AddUser("Engineering Lead", "engineering.lead@company.com", "Agent123!", Roles.Agent);
         var supportLead = AddUser("Support Lead", "support.lead@company.com", "Agent123!", Roles.Agent);
         var supportAgent = AddUser("Support Agent", "support.agent@company.com", "Agent123!", Roles.Agent);
+        AddUser("Amritha Manoj", "amrithamanoj@gmail.com", "password12345678", Roles.Customer);
         _ = admin;
 
         Teams[1] = new Team { Id = 1, Name = "Finance Team", Description = "Billing and payment issues", CreatedAt = DateTimeOffset.UtcNow };

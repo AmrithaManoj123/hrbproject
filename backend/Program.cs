@@ -1,5 +1,6 @@
 using Hangfire;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -17,6 +18,8 @@ AppFeatures.UseSqlServer = builder.Configuration.GetValue<bool>("Features:UseSql
 AppFeatures.UseHangfire = builder.Configuration.GetValue<bool>("Features:UseHangfire");
 AppFeatures.UploadPath = builder.Configuration.GetValue<string>("Storage:UploadPath") ?? "uploads";
 AppFeatures.JwtSecret = builder.Configuration.GetValue<string>("Jwt:Secret") ?? AppFeatures.JwtSecret;
+AppFeatures.JwtIssuer = builder.Configuration.GetValue<string>("Jwt:Issuer") ?? AppFeatures.JwtIssuer;
+AppFeatures.JwtAudience = builder.Configuration.GetValue<string>("Jwt:Audience") ?? AppFeatures.JwtAudience;
 AppFeatures.JwtExpiryHours = builder.Configuration.GetValue<int?>("Jwt:ExpiryHours") ?? 24;
 
 // Ensure the upload folder exists before any file upload endpoint tries to use it.
@@ -44,6 +47,13 @@ builder.Services.AddValidatorsFromAssemblyContaining<RegisterRequestValidator>()
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = Tokens.ValidationParameters();
+    });
+builder.Services.AddAuthorization();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("frontend", policy =>
@@ -63,21 +73,9 @@ app.UseCors("frontend");
 // Log each HTTP request through Serilog.
 app.UseSerilogRequestLogging();
 
-// Small JWT middleware: validates Bearer tokens and attaches the user principal.
-app.Use(async (context, next) =>
-{
-    var header = context.Request.Headers.Authorization.ToString();
-    if (header.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
-    {
-        var principal = Tokens.Validate(header["Bearer ".Length..]);
-        if (principal is not null)
-        {
-            context.User = principal;
-        }
-    }
-
-    await next();
-});
+// Standard ASP.NET authentication validates Bearer JWTs and attaches the principal to HttpContext.User.
+app.UseAuthentication();
+app.UseAuthorization();
 
 if (app.Environment.IsDevelopment())
 {

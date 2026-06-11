@@ -1,21 +1,17 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Json;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 public static class Auth
 {
     public static User? CurrentUser(HttpContext context)
     {
         var principal = context.User.Identity?.IsAuthenticated == true ? context.User : null;
-        if (principal is null)
-        {
-            var header = context.Request.Headers.Authorization.ToString();
-            if (!header.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase)) return null;
-            principal = Tokens.Validate(header["Bearer ".Length..]);
-        }
 
-        var userIdClaim = principal?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userIdClaim = principal?.FindFirst(ClaimTypes.NameIdentifier)?.Value
+            ?? principal?.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
         return Guid.TryParse(userIdClaim, out var userId) && Store.Users.TryGetValue(userId, out var user) ? user : null;
     }
 
@@ -51,54 +47,52 @@ public static class Tokens
 {
     public static string Issue(User user)
     {
-        var header = Base64Url(JsonSerializer.SerializeToUtf8Bytes(new { alg = "HS256", typ = "JWT" }));
-        var payload = Base64Url(JsonSerializer.SerializeToUtf8Bytes(new Dictionary<string, object>
+        var claims = new[]
         {
-            ["sub"] = user.Id.ToString(),
-            ["name"] = user.FullName,
-            ["email"] = user.Email,
-            ["role"] = user.Role,
-            ["exp"] = DateTimeOffset.UtcNow.AddHours(AppFeatures.JwtExpiryHours).ToUnixTimeSeconds()
-        }));
-        var signature = Sign($"{header}.{payload}");
-        return $"{header}.{payload}.{signature}";
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Name, user.FullName),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.Role)
+        };
+
+        var token = new JwtSecurityToken(
+            issuer: AppFeatures.JwtIssuer,
+            audience: AppFeatures.JwtAudience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddHours(AppFeatures.JwtExpiryHours),
+            signingCredentials: new SigningCredentials(SigningKey(), SecurityAlgorithms.HmacSha256));
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
     public static ClaimsPrincipal? Validate(string token)
     {
-        var parts = token.Split('.');
-        if (parts.Length != 3) return null;
-        if (!CryptographicOperations.FixedTimeEquals(Encoding.UTF8.GetBytes(Sign($"{parts[0]}.{parts[1]}")), Encoding.UTF8.GetBytes(parts[2]))) return null;
-
-        var payloadJson = Encoding.UTF8.GetString(Base64UrlDecode(parts[1]));
-        using var document = JsonDocument.Parse(payloadJson);
-        var root = document.RootElement;
-        if (!root.TryGetProperty("exp", out var exp) || DateTimeOffset.FromUnixTimeSeconds(exp.GetInt64()) < DateTimeOffset.UtcNow) return null;
-
-        var claims = new[]
+        try
         {
-            new Claim(ClaimTypes.NameIdentifier, root.GetProperty("sub").GetString()!),
-            new Claim(ClaimTypes.Name, root.GetProperty("name").GetString()!),
-            new Claim(ClaimTypes.Email, root.GetProperty("email").GetString()!),
-            new Claim(ClaimTypes.Role, root.GetProperty("role").GetString()!)
-        };
-        return new ClaimsPrincipal(new ClaimsIdentity(claims, "LocalJwt"));
+            return new JwtSecurityTokenHandler().ValidateToken(token, ValidationParameters(), out _);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
-    private static string Sign(string data)
+    public static TokenValidationParameters ValidationParameters() => new()
     {
-        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(AppFeatures.JwtSecret));
-        return Base64Url(hmac.ComputeHash(Encoding.UTF8.GetBytes(data)));
-    }
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = SigningKey(),
+        ValidateIssuer = true,
+        ValidIssuer = AppFeatures.JwtIssuer,
+        ValidateAudience = true,
+        ValidAudience = AppFeatures.JwtAudience,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.FromMinutes(2),
+        NameClaimType = ClaimTypes.NameIdentifier,
+        RoleClaimType = ClaimTypes.Role
+    };
 
-    private static string Base64Url(byte[] bytes) => Convert.ToBase64String(bytes).TrimEnd('=').Replace('+', '-').Replace('/', '_');
-
-    private static byte[] Base64UrlDecode(string value)
-    {
-        var padded = value.Replace('-', '+').Replace('_', '/');
-        padded = padded.PadRight(padded.Length + (4 - padded.Length % 4) % 4, '=');
-        return Convert.FromBase64String(padded);
-    }
+    private static SymmetricSecurityKey SigningKey() => new(Encoding.UTF8.GetBytes(AppFeatures.JwtSecret));
 }
 
 public static class Passwords
