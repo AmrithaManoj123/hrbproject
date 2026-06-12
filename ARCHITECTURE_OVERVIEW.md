@@ -19,9 +19,9 @@ The frontend communicates with the backend at `http://localhost:5000/api`.
 
 - `backend/Program.cs`
   - Configures Serilog logging
-  - Registers controllers, JWT auth, authorization, CORS, Swagger/OpenAPI
+  - Registers controllers, standard ASP.NET JWT bearer authentication, authorization, CORS, Swagger/OpenAPI
   - Supports optional EF Core SQL Server and Hangfire background jobs
-  - Seeds in-memory store if SQL Server is disabled
+  - Loads runtime feature flags and JWT settings from `appsettings.json`
   - Starts the API on `http://localhost:5000`
 
 - `backend/Controllers`
@@ -41,16 +41,27 @@ The frontend communicates with the backend at `http://localhost:5000/api`.
 
 - `backend/Services`
   - `Store.cs` — in-memory domain store for users, teams, categories, tickets, comments, attachments, history
-  - `Auth.cs` — user extraction, role checks, ticket access enforcement
+  - `Auth.cs` — JWT issuing/validation parameters, user extraction, role checks, ticket access enforcement
   - `Api.cs` — standardized response formatting and DTO mapping
   - `TicketHistoryService.cs` — audit trail entries
   - `TicketJobDispatcher.cs` — background job enqueueing
   - `AiReplyService.cs` — AI-generated reply suggestion support
 
+### Layering model
+
+The backend is currently organized as:
+
+```text
+Controller -> Service/helper classes -> Store
+```
+
+There is no formal repository layer yet. Most controllers read and write through `Store.cs` directly, with helper services used for auth, mapping, ticket history, background jobs, SLA, ML classification, and AI replies.
+
 ### Data persistence model
 
 - Default runtime store is in-memory dictionaries inside `backend/Services/Store.cs`.
-- Optional persistence with SQL Server when `Features:UseSqlServer` is enabled.
+- `AppDbContext` and `DbSeeder` exist for SQL Server support, but the current controller/job logic still uses `Store.cs` for runtime reads and writes.
+- Enabling `Features:UseSqlServer` registers EF Core and seeds the database, but a repository/data-access refactor would be needed before SQL Server becomes the main runtime persistence path.
 - Optional background work via Hangfire when `Features:UseHangfire` is enabled.
 
 ---
@@ -76,6 +87,17 @@ The frontend communicates with the backend at `http://localhost:5000/api`.
 
 - Models in `frontend/src/app/models`
   - User, ticket, pagination, comment, attachment, history interfaces
+
+### Frontend testing
+
+- `frontend/karma.conf.js`
+  - Karma/Jasmine browser test runner configuration
+- `frontend/tsconfig.spec.json`
+  - TypeScript configuration for spec files
+- `frontend/src/app/services/auth.service.spec.ts`
+  - Unit tests for login request shape, session persistence, and session clearing
+- `frontend/src/app/interceptors/auth.interceptor.spec.ts`
+  - Unit tests for adding valid JWTs and skipping expired JWTs
 
 ---
 
@@ -107,7 +129,7 @@ The frontend communicates with the backend at `http://localhost:5000/api`.
 - Request body:
   - `title: string`
   - `description: string`
-  - `categoryId?: number`
+- `categoryId?: number` exists in the DTO, but the current create flow primarily relies on the async AI classification job after ticket creation.
 - Response: created ticket summary
 
 #### `GET /api/tickets`
@@ -229,11 +251,53 @@ The frontend communicates with the backend at `http://localhost:5000/api`.
 ## Authorization Rules
 
 - `POST /api/auth/register` and `POST /api/auth/login` are public.
-- All other controllers require JWT authentication.
+- Controllers are decorated with `[Authorize]`; `register` and `login` use `[AllowAnonymous]`.
+- JWT validation is centralized through ASP.NET Core `AddJwtBearer` in `Program.cs`.
 - `Customer` can create tickets and view their own tickets.
 - `Agent` can view assigned tickets, update status/priority/category, add comments, and request AI replies.
 - `Admin` can manage tickets, teams, categories, and all users.
 - Ticket access is enforced by `Auth.RequireTicketAccess`.
+
+---
+
+## Unit Testing
+
+### Backend
+
+- Test project: `tests/Backend.Tests`
+- Test framework: xUnit
+- Current test focus:
+  - JWT issue/validate round trip
+  - tampered token rejection
+  - resolving the current user from an authenticated principal
+- Run:
+
+```text
+dotnet test tests\Backend.Tests\Backend.Tests.csproj
+```
+
+### Frontend
+
+- Test framework: Karma/Jasmine
+- Current test focus:
+  - `AuthService`
+  - auth HTTP interceptor
+- Run from `frontend/`:
+
+```text
+npm test
+```
+
+---
+
+## Branching Strategy
+
+- `feature`
+  - New features, updates, experiments, and in-progress work
+- `dev`
+  - Integrated testing branch before stable release
+- `main`
+  - Stable branch for final, working code only
 
 ---
 
